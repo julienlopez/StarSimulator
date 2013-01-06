@@ -20,6 +20,14 @@ public:
             (*this)(n) = *i;
     }
 
+    BasicMatrix(std::initializer_list<std::initializer_list<double>> lst)
+    {
+        uint8_t m = 0, n = 0;
+        for(std::initializer_list<std::initializer_list<double>>::const_iterator i = lst.begin(); i < lst.end(); ++i, m++)
+	        for(std::initializer_list<double>::const_iterator j = i->begin(); j < i->end(); ++j, n++)
+    	        (*this)(m, n) = *j;
+    }
+
     BasicMatrix<typename STORAGE::type_transposed_storage> transpose() const
     {
         typedef BasicMatrix<typename STORAGE::type_transposed_storage> type_transpose;
