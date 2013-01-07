@@ -21,10 +21,10 @@ clean:
 #cppunits
 
 $(DIR_BIN)/$(EXEC): $(DIR_OBJ)/$(DIR_TESTS)/main.o $(DIR_OBJ)/$(DIR_TESTS)/matrix_ut.o 
-	$(CC) $(DIR_OBJ)/$(DIR_TESTS)/main.o -o $(DIR_BIN)/$(EXEC) $(LDFLAGS_TEST)
+	$(CC) -o $(DIR_BIN)/$(EXEC) $(LDFLAGS_TEST) $(DIR_OBJ)/$(DIR_TESTS)/main.o $(DIR_OBJ)/$(DIR_TESTS)/matrix_ut.o 
 
+$(DIR_OBJ)/$(DIR_TESTS)/main.o: main.cpp matrix_ut.hpp
+	$(CC) -c main.cpp -o $(DIR_OBJ)/$(DIR_TESTS)/main.o $(CFLAGS_TEST)
+	
 $(DIR_OBJ)/$(DIR_TESTS)/matrix_ut.o : matrix_ut.cpp matrix_ut.hpp $(DIR_SRC)/utils/matrix.hpp $(DIR_SRC)/utils/plainstorage.hpp
 	$(CC) -c matrix_ut.cpp -o $(DIR_OBJ)/$(DIR_TESTS)/matrix_ut.o $(CFLAGS_TEST)
-	
-$(DIR_BIN)/$(EXEC): $(DIR_OBJ)/$(DIR_TESTS)/main.o 
-	$(CC) $(DIR_OBJ)/$(DIR_TESTS)/main.o -o $(DIR_BIN)/$(EXEC) $(LDFLAGS_TEST)
